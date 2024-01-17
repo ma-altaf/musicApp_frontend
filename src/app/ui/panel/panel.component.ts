@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SongService } from '../../services/song/song.service';
 import { ArtistService } from '../../services/artist/artist.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-panel',
@@ -12,12 +13,20 @@ import { ArtistService } from '../../services/artist/artist.service';
 export class PanelComponent {
   constructor(
     private songService: SongService,
-    private artistService: ArtistService
+    private artistService: ArtistService,
+    private auth: AuthenticationService
   ) {}
 
   ngOnInit() {
-    this.artistService.getArtists({}).subscribe((paginatedSongs) => {
-      console.log(paginatedSongs.content);
+    //Testing update password, authorization cookies not being sent
+    this.auth.register('user3', 'pass').subscribe((authU) => {
+      console.log(authU);
+      this.auth.login('user3', 'pass').subscribe((artist) => {
+        console.log(artist);
+        this.auth.updatePassword('pass', 'newPass').subscribe((artist) => {
+          console.log(artist);
+        });
+      });
     });
   }
 }
