@@ -19,13 +19,11 @@ export class PanelComponent {
 
   ngOnInit() {
     //Testing update password, authorization cookies not being sent
-    this.auth.register('user3', 'pass').subscribe((authU) => {
+    this.auth.register('user', 'pass').subscribe((authU) => {
       console.log(authU);
-      this.auth.login('user3', 'pass').subscribe((artist) => {
+      sessionStorage.setItem('token', authU.token);
+      this.auth.updatePassword('pass', 'newPass').subscribe((artist) => {
         console.log(artist);
-        this.auth.updatePassword('pass', 'newPass').subscribe((artist) => {
-          console.log(artist);
-        });
       });
     });
   }
