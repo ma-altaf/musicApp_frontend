@@ -1,0 +1,18 @@
+<div class="rounded-xl mx-2 p-2 w-full bg-white">
+  <span class=" ">
+    <p>Playlists:</p>
+  </span>
+  <ul class="mt-1 py-1 border-t-2">
+    @for (playlist of playlists; track $index) {
+    <li class="">
+      <a
+        [routerLink]="['/playlist', playlist.id]"
+        class="w-full flex items-center px-2 py-1 text-left rounded-md hover:bg-gray-100"
+      >
+        <span class="material-symbols-outlined"> playlist_play </span>
+        <p class="ml-2">{{ playlist.title }}</p>
+      </a>
+    </li>
+    }
+  </ul>
+</div>

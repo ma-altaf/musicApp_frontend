@@ -1,0 +1,49 @@
+<form
+  [formGroup]="userForm"
+  (submit)="onSubmit()"
+  class="flex flex-col items-center"
+>
+  <h1>{{ formHeader }}</h1>
+
+  <label class="text-sm w-full" for="username">username:</label>
+  <input
+    type="text"
+    id="username"
+    name="username"
+    formControlName="username"
+    class="w-full p-1 rounded-md border-black border-2 outline-blue-500"
+  />
+  @if (username?.touched && username?.errors?.['required']) {
+  <p class="w-full rounded-md bg-red-100 text-sm p-1 mt-1">
+    Username is required.
+  </p>
+  }
+
+  <label class="text-sm w-full mt-1" for="password">password:</label>
+  <input
+    type="password"
+    id="password"
+    name="password"
+    formControlName="password"
+    class="w-full p-1 rounded-md border-black border-2 outline-blue-500"
+  />
+  @if (password?.touched && password?.errors?.['minlength']) {
+  <p class="w-full rounded-md bg-red-100 text-sm p-1 mt-1">
+    Password must be at least {{ passwordMinLength }}.
+  </p>
+  }
+
+  <span class="flex items-center">
+    <input
+      type="submit"
+      value="{{ formSubmitText }}"
+      class="cursor-pointer px-2.5 py-1 rounded-md border-blue-500 border-2 text-blue-500 mt-2 w-fit duration-100 hover:bg-blue-100"
+    />
+    <p
+      class="cursor-pointer underline text-blue-500 ml-3 mt-2 px-2 py-1"
+      (click)="toggleRegister()"
+    >
+      {{ formToggleText }}
+    </p>
+  </span>
+</form>

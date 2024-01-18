@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Song } from '../models/song';
 import { PaginationRequest } from '../models/pagination-request';
@@ -10,8 +10,7 @@ import { PaginationResponse } from '../models/pagination-response';
 })
 export class SongService {
   private baseUrl: string = 'http://localhost:8080/song';
-
-  constructor(private http: HttpClient) {}
+  private http: HttpClient = inject(HttpClient);
 
   getSongs({
     pageNo = 0,

@@ -1,0 +1,14 @@
+<div class="flex flex-col bg-white h-fit rounded-xl m-2 p-2">
+  @if (displayForm) {
+  <app-account-form />
+  } @else {
+  <p>Sign in to download, like and create playlists.</p>
+  <button
+    (click)="toggleDisplayForm()"
+    class="mt-3 w-fit rounded-full px-2 py-1 text-blue-500 border-2 border-blue-500 flex duration-100 hover:bg-blue-100"
+  >
+    <span class="material-symbols-outlined"> account_circle </span>
+    <p class="mx-1">Sign in</p>
+  </button>
+  }
+</div>

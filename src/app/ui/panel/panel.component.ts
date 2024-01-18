@@ -1,30 +1,34 @@
-import { Component } from '@angular/core';
-import { SongService } from '../../services/song/song.service';
-import { ArtistService } from '../../services/artist/artist.service';
+import { Component, effect, inject } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { AccountPanelComponent } from '../account-panel/account-panel.component';
+import { AccountDetailsPanelComponent } from '../account-details-panel/account-details-panel.component';
+import { Artist } from '../../services/models/artist';
+import { PlaylistPanelComponent } from '../playlist-panel/playlist-panel.component';
 
 @Component({
   selector: 'app-panel',
   standalone: true,
-  imports: [],
+  imports: [
+    AccountPanelComponent,
+    PlaylistPanelComponent,
+    AccountDetailsPanelComponent,
+  ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.scss',
 })
 export class PanelComponent {
-  constructor(
-    private songService: SongService,
-    private artistService: ArtistService,
-    private auth: AuthenticationService
-  ) {}
+  private auth: AuthenticationService = inject(AuthenticationService);
+  user: Artist | null = null;
 
-  ngOnInit() {
-    //Testing update password, authorization cookies not being sent
-    this.auth.register('user', 'pass').subscribe((authU) => {
-      console.log(authU);
-      sessionStorage.setItem('token', authU.token);
-      this.auth.updatePassword('pass', 'newPass').subscribe((artist) => {
-        console.log(artist);
-      });
+  isSignIn: boolean = false;
+
+  constructor() {
+    // let the ui know if the user have sign in/ have a token
+    effect(() => {
+      this.isSignIn = this.auth.tokenAvailable();
+      if (this.isSignIn) {
+        this.auth.getCurrentUser().subscribe((artist) => (this.user = artist));
+      }
     });
   }
 }
