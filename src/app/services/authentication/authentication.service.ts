@@ -48,4 +48,8 @@ export class AuthenticationService {
       }
     );
   }
+
+  updateImg(formData: FormData): Observable<Artist> {
+    return this.http.post<Artist>(`${this.baseUrl}/updateImg`, formData);
+  }
 }
