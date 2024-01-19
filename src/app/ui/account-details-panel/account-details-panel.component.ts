@@ -28,12 +28,5 @@ export class AccountDetailsPanelComponent {
         this.user = res;
       });
     }
-
-    // await fetch('http://localhost:8080/photoz', {
-    //   method: 'POST',
-    //   body: formData,
-    // })
-    //   .then((result) => result.text())
-    //   .then((text) => alert(text));
   }
 }
