@@ -13,7 +13,11 @@
       class="bg-blue-500 aspect-square rounded-full w-10 overflow-hidden flex items-center justify-center"
     >
       @if (user?.imgUrl) {
-      <img [src]="user?.imgUrl" alt="profile" />
+      <img
+        [src]="user?.imgUrl"
+        alt="profile"
+        class="object-cover w-full h-full"
+      />
       } @else {
       <h1 class="font-bold">
         {{ user?.username?.charAt(0)?.toUpperCase() }}

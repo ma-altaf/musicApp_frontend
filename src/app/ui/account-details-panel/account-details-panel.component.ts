@@ -25,10 +25,7 @@ export class AccountDetailsPanelComponent {
     if (filelist) {
       formData.append('imgFile', filelist[0]);
       this.auth.updateImg(formData).subscribe((res) => {
-        console.log(res);
-        if (this.user?.imgUrl) {
-          this.user.imgUrl = res.imgUrl;
-        }
+        this.user = res;
       });
     }
 
