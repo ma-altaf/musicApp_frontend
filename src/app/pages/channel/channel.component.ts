@@ -10,11 +10,13 @@ import { AuthenticationService } from '../../services/authentication/authenticat
 import { ProfilePictureComponent } from '../../ui/profile-picture/profile-picture.component';
 import { Song } from '../../services/models/song';
 import { SongService } from '../../services/song/song.service';
+import { RouterLink } from '@angular/router';
+import { ArtistStats } from '../../services/models/artist-stats';
 
 @Component({
   selector: 'app-channel',
   standalone: true,
-  imports: [ProfilePictureComponent],
+  imports: [ProfilePictureComponent, RouterLink],
   templateUrl: './channel.component.html',
   styleUrl: './channel.component.scss',
   host: {
@@ -26,7 +28,8 @@ export class ChannelComponent {
   private songService: SongService = inject(SongService);
   user: Artist | null = null;
   songs: Song[] | null = null;
-  @ViewChild('fileupload') fileUpload!: ElementRef<HTMLInputElement>;
+  artistStats: ArtistStats | null = null;
+  @ViewChild('fileupload') fileUploadInput!: ElementRef<HTMLInputElement>;
 
   isSignIn: boolean = false;
 
@@ -39,24 +42,35 @@ export class ChannelComponent {
           this.user = artist;
           this.songService.getSongsByArtist(artist.id).subscribe((songs) => {
             this.songs = songs;
+            this.artistStats = this.getArtistStats(songs);
           });
         });
       }
     });
   }
 
-  initiateFileUpload() {
-    this.fileUpload.nativeElement.click();
+  fileUploadInputClick() {
+    this.fileUploadInput.nativeElement.click();
   }
 
   uploadProfileImg() {
     let formData = new FormData();
-    let filelist: FileList | null = this.fileUpload.nativeElement?.files;
+    let filelist: FileList | null = this.fileUploadInput.nativeElement?.files;
     if (filelist) {
       formData.append('imgFile', filelist[0]);
       this.auth.updateImg(formData).subscribe((res) => {
         this.user = res;
       });
     }
+  }
+
+  getArtistStats(songs: Song[]): ArtistStats {
+    return songs.reduce((res, song) => {
+      res.downloads += song.downloads;
+      res.favourites += song.favourites;
+      res.listens += song.listens;
+
+      return res;
+    });
   }
 }

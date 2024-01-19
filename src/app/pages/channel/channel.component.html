@@ -1,4 +1,4 @@
-<div class="m-2 ml-0 p-2 w-full rounded-lg bg-white overflow-y-scroll">
+<div class="m-2 ml-0 p-2 w-full rounded-lg bg-white overflow-y-auto">
   <input
     #fileupload
     type="file"
@@ -9,18 +9,43 @@
   />
   <div class="w-full flex items-center border-b-2 p-4">
     <button
-      (click)="initiateFileUpload()"
+      (click)="fileUploadInputClick()"
       title="Change profile picture"
-      class="aspect-square rounded-full m-5 w-64 overflow-hidden flex items-center justify-center"
+      class="aspect-square rounded-full m-5 w-64 overflow-hidden flex items-center justify-center text-9xl"
     >
       <app-profile-picture [user]="user" />
     </button>
-    <h1 class="text-6xl mx-auto">{{ user?.username }}</h1>
+    <span class="mx-auto flex flex-col items-center">
+      <h1 class="text-6xl">{{ user?.username }}</h1>
+      <div class="grid grid-cols-3 mt-4">
+        <div class="px-2 py-1 my-4 flex flex-col items-center">
+          <p class="text-sm">Downloads</p>
+          <p>{{ artistStats?.downloads || 0 }}</p>
+        </div>
+        <div class="px-2 py-1 my-4 border-x-2 flex flex-col items-center">
+          <p class="text-sm">Favourites</p>
+          <p>{{ artistStats?.favourites || 0 }}</p>
+        </div>
+        <div class="px-2 py-1 my-4 flex flex-col items-center">
+          <p class="text-sm">Listens</p>
+          <p>{{ artistStats?.listens || 0 }}</p>
+        </div>
+      </div>
+    </span>
   </div>
   <div class="grid grid-cols-3 gap-6 m-6">
+    <a
+      routerLink="/edit/song"
+      class="w-full rounded-lg p-2 duration-300 bg-gray-100 hover:bg-gray-300 flex flex-col items-center cursor-pointer"
+    >
+      <span class="w-full aspect-square justify-center items-center flex">
+        <span class="material-symbols-outlined text-9xl"> add </span>
+      </span>
+      <p class="mt-2 font-bold text-lg">Add song</p>
+    </a>
     @for (song of songs; track $index) {
     <div
-      class="w-full rounded-lg p-2 duration-300 hover:bg-gray-200 flex flex-col items-center cursor-pointer"
+      class="w-full rounded-lg p-4 duration-300 hover:bg-gray-200 flex flex-col items-center cursor-pointer"
     >
       <img
         class="w-full aspect-square rounded-xl"

@@ -1,0 +1,60 @@
+<div class="m-2 ml-0 p-2 w-full rounded-lg bg-white overflow-y-auto">
+  <form
+    class="flex flex-col justify-center items-center"
+    [formGroup]="songForm"
+    (submit)="uploadSong()"
+  >
+    <input
+      #imageInput
+      type="file"
+      accept="image/*"
+      name="image"
+      id="image"
+      class="hidden"
+      (change)="onImgPick($event)"
+    />
+    <div
+      (click)="imageFileInputClick()"
+      class="aspect-square w-80 m-4 rounded-lg overflow-hidden cursor-pointer"
+    >
+      <img
+        #image
+        src="./assets/empty_song_bg.png"
+        alt="song cover"
+        class="w-full h-full"
+      />
+    </div>
+
+    <label for="audio" class="flex w-1/2 items-center m-2"
+      ><p class="pr-4">Song:</p>
+      <input
+        #audioInput
+        type="file"
+        accept="audio/*"
+        name="audio"
+        id="audio"
+        class="w-full rounded-lg border-2 border-black p-2 outline-blue-500"
+        (change)="onAudioPick($event)"
+    /></label>
+
+    <label for="title" class="flex w-1/2 items-center m-2"
+      ><p class="pr-4">Title:</p>
+      <input
+        type="text"
+        name="title"
+        formControlName="title"
+        class="w-full rounded-lg border-2 border-black p-2 outline-blue-500"
+      />
+    </label>
+    @if (title?.touched && !title?.valid) {
+    <p>Title is required</p>
+    }
+
+    <button class="rounded-lg bg-blue-500 py-2 px-4 mt-2">Upload</button>
+    @if (showError) {
+    <p class="py-1 px-2 border-2 border-red-500 bg-red-300 rounded-lg mt-4">
+      Cover art and song audio are required
+    </p>
+    }
+  </form>
+</div>

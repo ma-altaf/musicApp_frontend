@@ -39,4 +39,12 @@ export class SongService {
   getSongsByArtist(id: number): Observable<Song[]> {
     return this.http.get<Song[]>(`${this.baseUrl}/artist/${id}`);
   }
+
+  addSong(songForm: any) {
+    return this.http.post(`${this.baseUrl}/add`, songForm);
+  }
+
+  updateSong(songForm: any) {
+    return this.http.post(`${this.baseUrl}/update`, songForm);
+  }
 }
