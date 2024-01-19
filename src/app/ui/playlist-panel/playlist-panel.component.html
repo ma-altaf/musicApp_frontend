@@ -1,10 +1,11 @@
 <div class="rounded-xl mx-2 p-2 w-full bg-white">
-  <span class=" ">
+  <div class="border-b-2 mb-1 pb-1">
     <p>Playlists:</p>
-  </span>
-  <ul class="mt-1 py-1 border-t-2">
+  </div>
+  @if (playlists && playlists.length > 0) {
+  <ul class="mt-1 py-1">
     @for (playlist of playlists; track $index) {
-    <li class="">
+    <li>
       <a
         [routerLink]="['/playlist', playlist.id]"
         class="w-full flex items-center px-2 py-1 text-left rounded-md hover:bg-gray-100"
@@ -15,4 +16,13 @@
     </li>
     }
   </ul>
+  } @else {
+  <div class="w-full flex-col flex items-center justify-center">
+    <span class="material-symbols-outlined text-9xl text-gray-400">
+      playlist_add
+    </span>
+    <p>Add first playlist</p>
+  </div>
+
+  }
 </div>

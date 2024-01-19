@@ -1,0 +1,7 @@
+@if (user?.imgUrl) {
+<img [src]="user?.imgUrl" alt="profile" class="object-cover w-full h-full" />
+} @else {
+<h1 class="font-bold w-full h-full bg-blue-500">
+  {{ user?.username?.charAt(0)?.toUpperCase() }}
+</h1>
+}

@@ -35,4 +35,8 @@ export class SongService {
   searchSongs(query: String): Observable<Song[]> {
     return this.http.get<Song[]>(`${this.baseUrl}/search/${query}`);
   }
+
+  getSongsByArtist(id: number): Observable<Song[]> {
+    return this.http.get<Song[]>(`${this.baseUrl}/artist/${id}`);
+  }
 }
