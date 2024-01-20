@@ -12,5 +12,5 @@ import { ProfilePictureComponent } from '../profile-picture/profile-picture.comp
   styleUrl: './account-details-panel.component.scss',
 })
 export class AccountDetailsPanelComponent {
-  @Input() user: Artist | null = null;
+  @Input() user!: Artist;
 }

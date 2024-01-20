@@ -20,13 +20,10 @@ export class PanelComponent {
   private auth: AuthenticationService = inject(AuthenticationService);
   user: Artist | null = null;
 
-  isSignIn: boolean = false;
-
   constructor() {
     // let the ui know if the user have sign in/ have a token
     effect(() => {
-      this.isSignIn = this.auth.tokenAvailable();
-      if (this.isSignIn) {
+      if (this.auth.tokenAvailable()) {
         this.auth.getCurrentUser().subscribe((artist) => (this.user = artist));
       }
     });

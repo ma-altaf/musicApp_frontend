@@ -5,6 +5,12 @@
 >
   <h1>{{ formHeader }}</h1>
 
+  @if (showAuthenticationFailed) {
+  <p class="w-full rounded-md bg-red-100 text-sm p-1 mt-1">
+    Username or password is incorrect.
+  </p>
+  }
+
   <label class="text-sm w-full" for="username">username:</label>
   <input
     type="text"

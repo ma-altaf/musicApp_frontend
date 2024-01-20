@@ -33,27 +33,22 @@
       </div>
     </span>
   </div>
-  <div class="grid grid-cols-3 gap-6 m-6">
+  <div class="w-full p-2 flex flex-row">
+    <app-drop-down-menu
+      [options]="sortingOptions"
+      (onOptionChange)="changeSortField($event)"
+    />
     <a
       routerLink="/edit/song"
-      class="w-full rounded-lg p-2 duration-300 bg-gray-100 hover:bg-gray-300 flex flex-col items-center cursor-pointer"
+      class="w-fit rounded-lg p-2 mx-2 duration-300 bg-gray-100 hover:bg-gray-300 flex items-center cursor-pointer"
     >
-      <span class="w-full aspect-square justify-center items-center flex">
-        <span class="material-symbols-outlined text-9xl"> add </span>
-      </span>
-      <p class="mt-2 font-bold text-lg">Add song</p>
+      <span class="material-symbols-outlined"> add </span>
+      <p class="ml-2">Add song</p>
     </a>
+  </div>
+  <div class="grid grid-cols-3 gap-6 mx-6">
     @for (song of songs; track $index) {
-    <div
-      class="w-full rounded-lg p-4 duration-300 hover:bg-gray-200 flex flex-col items-center cursor-pointer"
-    >
-      <img
-        class="w-full aspect-square rounded-xl"
-        [src]="song.imgUrl"
-        alt="image of the song"
-      />
-      <p class="mt-2 font-bold text-lg">{{ song.title }}</p>
-    </div>
+    <app-song-tile [song]="song" />
     }
   </div>
 </div>

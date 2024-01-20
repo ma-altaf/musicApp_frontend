@@ -47,4 +47,33 @@ export class SongService {
   updateSong(songForm: any) {
     return this.http.post(`${this.baseUrl}/update`, songForm);
   }
+
+  sortSongs(songs: Song[], field: number) {
+    switch (field) {
+      case 0:
+        songs = songs.sort((a, b) => a.released - b.released);
+        break;
+      case 1:
+        songs = songs.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 2:
+        songs = songs.sort((a, b) => a.downloads - b.downloads);
+        break;
+      case 3:
+        songs = songs.sort((a, b) => a.favourites - b.favourites);
+        break;
+      case 4:
+        songs = songs.sort((a, b) => a.listens - b.listens);
+        break;
+    }
+    return songs;
+  }
 }
+
+export const SongSort: string[] = [
+  'Date',
+  'title',
+  'Downloads',
+  'Favourites',
+  'Listens',
+];

@@ -1,5 +1,5 @@
 <div class="w-full">
-  @if (isSignIn) {
+  @if (user) {
   <app-account-details-panel [user]="user" />
 
   <app-playlist-panel class="flex w-full" />

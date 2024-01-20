@@ -9,14 +9,21 @@ import { Artist } from '../../services/models/artist';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { ProfilePictureComponent } from '../../ui/profile-picture/profile-picture.component';
 import { Song } from '../../services/models/song';
-import { SongService } from '../../services/song/song.service';
+import { SongService, SongSort } from '../../services/song/song.service';
 import { RouterLink } from '@angular/router';
 import { ArtistStats } from '../../services/models/artist-stats';
+import { SongTileComponent } from '../../ui/song-tile/song-tile.component';
+import { DropDownMenuComponent } from '../../ui/drop-down-menu/drop-down-menu.component';
 
 @Component({
   selector: 'app-channel',
   standalone: true,
-  imports: [ProfilePictureComponent, RouterLink],
+  imports: [
+    ProfilePictureComponent,
+    SongTileComponent,
+    DropDownMenuComponent,
+    RouterLink,
+  ],
   templateUrl: './channel.component.html',
   styleUrl: './channel.component.scss',
   host: {
@@ -30,6 +37,9 @@ export class ChannelComponent {
   songs: Song[] | null = null;
   artistStats: ArtistStats | null = null;
   @ViewChild('fileupload') fileUploadInput!: ElementRef<HTMLInputElement>;
+
+  sortingOptions: string[] = SongSort;
+  orderAscending = true;
 
   isSignIn: boolean = false;
 
@@ -47,6 +57,8 @@ export class ChannelComponent {
         });
       }
     });
+
+    console.log(this.sortingOptions);
   }
 
   fileUploadInputClick() {
@@ -72,5 +84,11 @@ export class ChannelComponent {
 
       return res;
     });
+  }
+
+  changeSortField(event: number) {
+    if (this.songs != null) {
+      this.songs = this.songService.sortSongs(this.songs, event);
+    }
   }
 }

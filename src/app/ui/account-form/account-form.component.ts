@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-account-form',
@@ -22,6 +23,7 @@ export class AccountFormComponent {
   formSubmitText: 'Create' | 'Sign In' = 'Sign In';
   formToggleText: 'Log In' | 'Register' = 'Register';
   passwordMinLength: number = 8;
+  showAuthenticationFailed: boolean = false;
 
   userForm: FormGroup = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -48,17 +50,25 @@ export class AccountFormComponent {
       if (this.isRegister) {
         this.auth
           .register(this.username?.value, this.password?.value)
-          .subscribe((res) => {
-            sessionStorage.setItem('token', res.token);
-            this.auth.tokenAvailable.set(true);
-          });
+          .subscribe(
+            (res) => {
+              sessionStorage.setItem('token', res.token);
+              this.auth.tokenAvailable.set(true);
+            },
+            (error) => {
+              this.showAuthenticationFailed = true;
+            }
+          );
       } else {
-        this.auth
-          .login(this.username?.value, this.password?.value)
-          .subscribe((res) => {
+        this.auth.login(this.username?.value, this.password?.value).subscribe(
+          (res) => {
             sessionStorage.setItem('token', res.token);
             this.auth.tokenAvailable.set(true);
-          });
+          },
+          (error) => {
+            this.showAuthenticationFailed = true;
+          }
+        );
       }
     }
   }
