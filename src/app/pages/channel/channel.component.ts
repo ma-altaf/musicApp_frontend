@@ -51,7 +51,7 @@ export class ChannelComponent {
         this.auth.getCurrentUser().subscribe((artist) => {
           this.user = artist;
           this.songService.getSongsByArtist(artist.id).subscribe((songs) => {
-            this.songs = songs;
+            this.songs = this.songService.sortSongs(songs, 0);
             this.artistStats = this.getArtistStats(songs);
           });
         });
