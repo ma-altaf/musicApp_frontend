@@ -1,4 +1,4 @@
-import { Component, NgModule, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SongService } from '../../services/song/song.service';
 import { Song } from '../../services/models/song';
 import { PaginationResponse } from '../../services/models/pagination-response';
