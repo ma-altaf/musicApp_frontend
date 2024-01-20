@@ -1,10 +1,28 @@
 <div
-  class="w-full rounded-lg p-4 duration-300 hover:bg-gray-200 flex flex-col items-center cursor-pointer"
+  class="w-full rounded-lg p-4 duration-300 bg-gray-100 hover:bg-gray-200 flex flex-col items-center cursor-pointer overflow-hidden"
 >
   <img
     class="w-full aspect-square rounded-xl object-cover"
     [src]="song.imgUrl"
     alt="image of the song"
   />
-  <p class="mt-2 font-bold text-lg">{{ song.title }}</p>
+  <p
+    class="mt-2 font-bold text-lg w-11/12 text-center text-nowrap overflow-hidden"
+  >
+    {{ song.title }}
+  </p>
+  <span class="grid grid-cols-3">
+    <div class="flex justify-center items-center text-lg p-1">
+      <p>{{ song.downloads }}</p>
+      <span class="material-symbols-outlined ml-1"> download </span>
+    </div>
+    <div class="flex justify-center items-center text-lg p-1 border-x-2">
+      <p>{{ song.listens }}</p>
+      <span class="material-symbols-outlined ml-1"> headphones </span>
+    </div>
+    <div class="flex justify-center items-center text-lg p-1">
+      <p>{{ song.favourites }}</p>
+      <span class="material-symbols-outlined ml-1"> favorite </span>
+    </div>
+  </span>
 </div>

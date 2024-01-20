@@ -83,8 +83,6 @@ export class SongFormComponent {
   }
 
   uploadSong() {
-    console.log(this.songForm.value);
-
     if (this.audio?.value == null || this.image?.value == null) {
       this.showError = true;
       return;

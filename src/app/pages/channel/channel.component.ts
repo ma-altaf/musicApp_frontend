@@ -57,8 +57,6 @@ export class ChannelComponent {
         });
       }
     });
-
-    console.log(this.sortingOptions);
   }
 
   fileUploadInputClick() {

@@ -9,4 +9,5 @@ export interface PaginationResponse<T> {
   size: number;
   totalElements: number;
   totalPages: number;
+  number: number;
 }

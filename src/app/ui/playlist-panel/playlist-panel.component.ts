@@ -19,7 +19,6 @@ export class PlaylistPanelComponent {
   constructor() {
     this.playlistService.getUserPlaylists().subscribe((res) => {
       this.playlists = res;
-      console.log(this.playlists);
     });
   }
 
