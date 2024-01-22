@@ -14,7 +14,7 @@ export class SongService {
 
   getSongs({
     pageNo = 0,
-    pageSize = 2,
+    pageSize = 6,
     orderBy = 'title',
     order = 'ASC',
   }: PaginationRequest): Observable<PaginationResponse<Song>> {

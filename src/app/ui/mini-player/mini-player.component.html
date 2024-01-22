@@ -1,5 +1,5 @@
 @if (playerService.currentPlaylist().length !== 0) {
-<div class="m-4 p-2 z-20 bg-gray-100 w-48 rounded-lg">
+<div class="m-4 p-2 z-20 bg-gray-100 w-48 rounded-lg relative">
   @if (playerService.currentSong()) {
   <img
     src="{{ playerService.currentSong()?.imgUrl }}"
@@ -12,7 +12,7 @@
   <div class="w-full flex justify-evenly py-2">
     <button
       (click)="togglePlaylistVisibility()"
-      class="bg-opacity-15 bg-black p-1 flex rounded-lg hover:bg-white"
+      class="bg-opacity-15 bg-black p-1 flex rounded-lg duration-300 hover:bg-white hover:shadow-sm"
     >
       <span class="material-symbols-outlined"> queue_music </span>
     </button>
@@ -39,16 +39,34 @@
     </button>
   </div>
   }
-  <div #playlistQueue class="flex w-full flex-col hidden">
+  <ul
+    #playlistQueue
+    class="flex w-64 flex-col hidden absolute top-0 -left-2 -translate-x-full bg-gray-100 p-2 rounded-lg h-full overflow-y-auto"
+  >
+    <!-- <span class="grid grid-cols-1 w-full overflow-x-hidden h-fit"> -->
     @for (song of currentPlaylist; track $index) {
-    <button
-      #playlistItem
-      (click)="setAndplaySong(song)"
-      class="text-start text-nowrap overflow-hidden px-2 hover:bg-opacity-15 hover:bg-black rounded-lg duration-300"
-    >
-      {{ song.title }}
-    </button>
+    <li class="w-full flex">
+      <button
+        #playlistItem
+        (click)="setAndplaySong(song)"
+        class="text-start text-nowrap flex-grow overflow-hidden p-1 my-0.5 bg-opacity-15 flex flex-row duration-300 hover:bg-white hover:shadow-sm rounded-lg"
+        [class]="{ 'bg-black': song.id === playerService.currentSong()?.id }"
+      >
+        <img
+          src="{{ song.imgUrl }}"
+          alt="cover art for {{ song.title }}"
+          class="w-10 rounded-lg aspect-square"
+        />
+        <span class="ml-2">
+          <p class="overflow-hidden">{{ song.title }}</p>
+          <p class="text-sm -mt-1 overflow-hidden">
+            {{ song.author.username }}
+          </p>
+        </span>
+      </button>
+    </li>
     }
-  </div>
+  </ul>
+  <!-- </span> -->
 </div>
 }

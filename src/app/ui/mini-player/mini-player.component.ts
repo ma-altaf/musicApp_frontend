@@ -24,10 +24,15 @@ export class MiniPlayerComponent {
   playerService: PlayerService = inject(PlayerService);
   currentPlaylist: Song[] = [];
   @ViewChild('playlistQueue') playlistElement!: ElementRef<HTMLElement>;
+  currentSongIndex: number = 0;
 
   constructor() {
     effect(() => {
       this.currentPlaylist = this.playerService.currentPlaylist();
+
+      this.currentSongIndex = this.currentPlaylist
+        .map((el) => el.id)
+        .indexOf(this.playerService.currentSong()!.id);
     });
   }
 
