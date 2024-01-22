@@ -1,4 +1,12 @@
-import { Component, effect, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+  effect,
+  inject,
+} from '@angular/core';
 import { Song } from '../../services/models/song';
 import { PlayerService } from '../../services/player/player.service';
 
@@ -15,6 +23,7 @@ import { PlayerService } from '../../services/player/player.service';
 export class MiniPlayerComponent {
   playerService: PlayerService = inject(PlayerService);
   currentPlaylist: Song[] = [];
+  @ViewChild('playlistQueue') playlistElement!: ElementRef<HTMLElement>;
 
   constructor() {
     effect(() => {
@@ -40,5 +49,9 @@ export class MiniPlayerComponent {
 
   setAndplaySong(song: Song) {
     this.playerService.addAndPlaySong(song);
+  }
+
+  togglePlaylistVisibility() {
+    this.playlistElement.nativeElement.classList.toggle('hidden');
   }
 }

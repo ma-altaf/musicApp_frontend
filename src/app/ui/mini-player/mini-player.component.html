@@ -11,6 +11,12 @@
   </p>
   <div class="w-full flex justify-evenly py-2">
     <button
+      (click)="togglePlaylistVisibility()"
+      class="bg-opacity-15 bg-black p-1 flex rounded-lg hover:bg-white"
+    >
+      <span class="material-symbols-outlined"> queue_music </span>
+    </button>
+    <button
       (click)="previousSong()"
       class="p-1 hover:bg-black hover:bg-opacity-30 rounded-lg flex duration-300"
     >
@@ -33,9 +39,10 @@
     </button>
   </div>
   }
-  <div class="flex w-full flex-col">
+  <div #playlistQueue class="flex w-full flex-col hidden">
     @for (song of currentPlaylist; track $index) {
     <button
+      #playlistItem
       (click)="setAndplaySong(song)"
       class="text-start text-nowrap overflow-hidden px-2 hover:bg-opacity-15 hover:bg-black rounded-lg duration-300"
     >
