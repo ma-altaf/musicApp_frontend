@@ -72,7 +72,7 @@ export class SongService {
 
 export const SongSort: string[] = [
   'Date',
-  'title',
+  'Title',
   'Downloads',
   'Favourites',
   'Listens',
