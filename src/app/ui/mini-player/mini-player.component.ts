@@ -15,9 +15,30 @@ import { PlayerService } from '../../services/player/player.service';
 export class MiniPlayerComponent {
   playerService: PlayerService = inject(PlayerService);
   currentPlaylist: Song[] = [];
+
   constructor() {
     effect(() => {
       this.currentPlaylist = this.playerService.currentPlaylist();
     });
+  }
+
+  toggleSongPlaying() {
+    if (this.playerService.audioPlayer.paused) {
+      this.playerService.playSong();
+    } else {
+      this.playerService.pauseSong();
+    }
+  }
+
+  previousSong() {
+    this.playerService.playPreviousSong();
+  }
+
+  nextSong() {
+    this.playerService.playNextSong();
+  }
+
+  setAndplaySong(song: Song) {
+    this.playerService.addAndPlaySong(song);
   }
 }

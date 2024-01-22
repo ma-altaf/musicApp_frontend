@@ -1,5 +1,5 @@
 <button
-  (click)="playSong(song)"
+  (click)="addAndPlaySong(song)"
   class="w-full rounded-lg p-4 duration-300 bg-gray-100 hover:bg-gray-200 flex flex-col items-center overflow-hidden"
 >
   <img
@@ -12,18 +12,29 @@
   >
     {{ song.title }}
   </p>
-  <span class="grid grid-cols-3">
-    <div class="flex justify-center items-center text-lg p-1">
-      <p>{{ song.downloads }}</p>
-      <span class="material-symbols-outlined ml-1"> download </span>
-    </div>
-    <div class="flex justify-center items-center text-lg p-1 border-x-2">
-      <p>{{ song.listens }}</p>
-      <span class="material-symbols-outlined ml-1"> headphones </span>
-    </div>
-    <div class="flex justify-center items-center text-lg p-1">
-      <p>{{ song.favourites }}</p>
-      <span class="material-symbols-outlined ml-1"> favorite </span>
-    </div>
-  </span>
+  <div class="w-full flex justify-between">
+    <span class="grid grid-cols-3 w-fit">
+      <div class="flex justify-center items-center text-lg p-1">
+        <p>{{ song.downloads }}</p>
+        <span class="material-symbols-outlined ml-1"> download </span>
+      </div>
+      <div
+        class="flex justify-center items-center text-lg p-1 border-x-2 border-opacity-15 border-black"
+      >
+        <p>{{ song.listens }}</p>
+        <span class="material-symbols-outlined ml-1"> headphones </span>
+      </div>
+      <div class="flex justify-center items-center text-lg p-1">
+        <p>{{ song.favourites }}</p>
+        <span class="material-symbols-outlined ml-1"> favorite </span>
+      </div>
+    </span>
+    <button
+      (click)="addToPlayer($event, song)"
+      title="Add {{ song.title }} to playlist"
+      class="p-2 bg-black bg-opacity-15 items-center aspect-square flex rounded-lg hover:bg-white duration-300"
+    >
+      <span class="material-symbols-outlined"> playlist_add </span>
+    </button>
+  </div>
 </button>

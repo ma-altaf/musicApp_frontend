@@ -13,11 +13,12 @@ export class SongTileComponent {
   @Input() song!: Song;
   private playerService: PlayerService = inject(PlayerService);
 
-  addToPlayer(song: Song) {
-    this.playerService.addSong(song);
+  addAndPlaySong(song: Song) {
+    this.playerService.addAndPlaySong(song);
   }
 
-  playSong(song: Song) {
-    this.playerService.playSong(song);
+  addToPlayer(event: Event, song: Song) {
+    event.stopPropagation();
+    this.playerService.AddSongToPlaylist(song);
   }
 }
