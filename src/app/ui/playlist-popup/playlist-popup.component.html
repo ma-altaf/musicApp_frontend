@@ -3,9 +3,12 @@
   (click)="leavePlaylistPopup($event)"
   class="absolute top-0 right-0 w-full h-full flex justify-center items-center bg-black bg-opacity-15 z-50"
 >
-  <div class="p-2 bg-white rounded-lg flex flex-col">
+  <div
+    (click)="$event.stopPropagation()"
+    class="p-2 bg-white rounded-lg flex flex-col max-h-[50%] pointer-events-auto"
+  >
     <p>Save song to:</p>
-    <ul>
+    <ul class="overflow-y-auto">
       @for (playlist of playlists; track $index) {
       <li>
         <button
