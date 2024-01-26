@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { PanelComponent } from './ui/panel/panel.component';
 import { MiniPlayerComponent } from './ui/mini-player/mini-player.component';
+import { PlaylistPopupComponent } from './ui/playlist-popup/playlist-popup.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [CommonModule, RouterOutlet, PanelComponent, MiniPlayerComponent],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    PanelComponent,
+    MiniPlayerComponent,
+    PlaylistPopupComponent,
+  ],
 })
 export class AppComponent {
   title = 'musicApp';

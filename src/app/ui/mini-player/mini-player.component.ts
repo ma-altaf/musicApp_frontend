@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { Song } from '../../services/models/song';
 import { PlayerService } from '../../services/player/player.service';
+import { PlaylistService } from '../../services/playlist/playlist.service';
 
 @Component({
   selector: 'app-mini-player',
@@ -22,6 +23,7 @@ import { PlayerService } from '../../services/player/player.service';
 })
 export class MiniPlayerComponent {
   playerService: PlayerService = inject(PlayerService);
+  playlistService: PlaylistService = inject(PlaylistService);
   currentPlaylist: Song[] = [];
   @ViewChild('playlistQueue') playlistElement!: ElementRef<HTMLElement>;
   currentSongIndex: number = 0;
@@ -62,6 +64,11 @@ export class MiniPlayerComponent {
   removeSong(event: Event, song: Song) {
     event.stopPropagation();
     this.playerService.removeSongFromPlaylist(song);
+  }
+
+  addSongToPlaylist(event: Event, song: Song) {
+    event.stopPropagation();
+    this.playlistService.openPlaylistPopup(song);
   }
 
   togglePlaylistVisibility() {

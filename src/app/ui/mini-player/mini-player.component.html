@@ -41,11 +41,17 @@
   }
   <ul
     #playlistQueue
-    class="flex w-64 flex-col hidden absolute top-0 -left-2 -translate-x-full bg-gray-100 p-2 rounded-lg h-full overflow-y-auto"
+    class="flex w-80 flex-col hidden absolute top-0 -left-2 -translate-x-full bg-gray-100 p-2 rounded-lg h-full overflow-y-auto"
   >
     <!-- <span class="grid grid-cols-1 w-full overflow-x-hidden h-fit"> -->
     @for (song of currentPlaylist; track $index) {
     <li class="w-full flex">
+      <button
+        (click)="removeSong($event, song)"
+        class="flex items-center p-1 mr-1 rounded-lg duration-300 hover:bg-black hover:bg-opacity-15"
+      >
+        <span class="material-symbols-outlined"> close </span>
+      </button>
       <button
         #playlistItem
         (click)="setAndplaySong($event, song)"
@@ -53,10 +59,10 @@
         [class]="{ 'bg-black': song.id === playerService.currentSong()?.id }"
       >
         <button
-          (click)="removeSong($event, song)"
+          (click)="addSongToPlaylist($event, song)"
           class="flex p-1 mr-1 rounded-lg duration-300 hover:bg-black hover:bg-opacity-15"
         >
-          <span class="material-symbols-outlined"> close </span>
+          <span class="material-symbols-outlined"> playlist_add </span>
         </button>
         <img
           src="{{ song.imgUrl }}"

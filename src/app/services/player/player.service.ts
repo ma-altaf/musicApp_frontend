@@ -35,6 +35,10 @@ export class PlayerService {
     if (song.id === this.currentSong()?.id) {
       // since current song will be removed select the next song
       this.nextSong();
+
+      if (!this.audioPlayer.paused) {
+        this.playSong();
+      }
     }
 
     this.currentPlaylist.update((prev) => {
