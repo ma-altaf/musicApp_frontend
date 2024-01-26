@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Playlist } from '../../services/models/playlist';
 import { PlaylistService } from '../../services/playlist/playlist.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-playlist-popup',
@@ -11,13 +12,18 @@ import { PlaylistService } from '../../services/playlist/playlist.service';
 })
 export class PlaylistPopupComponent {
   playlistService: PlaylistService = inject(PlaylistService);
+  private auth: AuthenticationService = inject(AuthenticationService);
   playlists: Playlist[] | null = null;
   newPlaylistTitle = '';
 
   constructor() {
-    this.playlistService
-      .getUserPlaylists()
-      .subscribe((res) => (this.playlists = res));
+    effect(() => {
+      if (this.auth.tokenAvailable()) {
+        this.playlistService
+          .getUserPlaylists()
+          .subscribe((res) => (this.playlists = res));
+      }
+    });
   }
 
   addSongToPlaylist(playlist: Playlist) {
