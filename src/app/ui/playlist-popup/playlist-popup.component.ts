@@ -22,7 +22,6 @@ export class PlaylistPopupComponent {
 
   addSongToPlaylist(playlist: Playlist) {
     this.playlistService.addSongToPlaylist(playlist.id).subscribe((res) => {
-      console.log(res);
       this.playlistService.playlistPopupSong.set(null);
     });
   }

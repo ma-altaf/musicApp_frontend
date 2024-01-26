@@ -1,5 +1,6 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Song } from '../models/song';
+import { Playlist } from '../models/playlist';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,15 @@ export class PlayerService {
     this.audioPlayer.onended = () => {
       this.playNextSong();
     };
+  }
+
+  setCurrentPlaylist(playlist: Playlist) {
+    this.currentPlaylist.set(
+      playlist.songs
+        .sort((a, b) => a.position - b.position)
+        .map((el) => el.song)
+    );
+    this.addAndPlaySong(this.currentPlaylist()[0]);
   }
 
   AddSongToPlaylist(song: Song) {
@@ -45,8 +55,6 @@ export class PlayerService {
       const index = prev.map((el) => el.id).indexOf(song.id);
 
       prev.splice(index, 1);
-      console.log('playlist after removal');
-      console.log(prev);
 
       if (prev.length === 0) {
         this.audioPlayer.pause();
