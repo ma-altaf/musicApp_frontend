@@ -48,21 +48,27 @@
     <li class="w-full flex">
       <button
         #playlistItem
-        (click)="setAndplaySong(song)"
-        class="text-start text-nowrap flex-grow overflow-hidden p-1 my-0.5 bg-opacity-15 flex flex-row duration-300 hover:bg-white hover:shadow-sm rounded-lg"
+        (click)="setAndplaySong($event, song)"
+        class="text-start text-nowrap items-center overflow-hidden p-1 my-0.5 bg-opacity-15 flex flex-row w-full duration-300 hover:bg-white hover:shadow-sm rounded-lg"
         [class]="{ 'bg-black': song.id === playerService.currentSong()?.id }"
       >
+        <button
+          (click)="removeSong($event, song)"
+          class="flex p-1 mr-1 rounded-lg duration-300 hover:bg-black hover:bg-opacity-15"
+        >
+          <span class="material-symbols-outlined"> close </span>
+        </button>
         <img
           src="{{ song.imgUrl }}"
           alt="cover art for {{ song.title }}"
           class="w-10 rounded-lg aspect-square"
         />
-        <span class="ml-2">
-          <p class="overflow-hidden">{{ song.title }}</p>
-          <p class="text-sm -mt-1 overflow-hidden">
+        <div class="ml-2 max-w-full">
+          <p class="overflow-hidden w-full">{{ song.title }}</p>
+          <p class="text-sm -mt-1 overflow-hidden w-full">
             {{ song.author.username }}
           </p>
-        </span>
+        </div>
       </button>
     </li>
     }

@@ -13,7 +13,7 @@
     {{ song.title }}
   </p>
   <P class="text-sm">{{ song.author.username }}</P>
-  <div class="w-full flex justify-between">
+  <div class="w-full flex justify-between items-center">
     <span class="grid grid-cols-3 w-fit">
       <div class="flex justify-center items-center text-lg p-1">
         <p>{{ song.downloads }}</p>
@@ -30,6 +30,9 @@
         <span class="material-symbols-outlined ml-1"> favorite </span>
       </div>
     </span>
+    <p class="w-fit h-fit">
+      {{ song.released | date }}
+    </p>
     <button
       (click)="addToPlayer($event, song)"
       title="Add {{ song.title }} to playlist"

@@ -31,8 +31,26 @@ export class PlayerService {
     });
   }
 
-  removeSongFromPlaylist(index: number) {
-    this.currentPlaylist.update((prev) => prev.slice(index, 1));
+  removeSongFromPlaylist(song: Song) {
+    if (song.id === this.currentSong()?.id) {
+      // since current song will be removed select the next song
+      this.nextSong();
+    }
+
+    this.currentPlaylist.update((prev) => {
+      const index = prev.map((el) => el.id).indexOf(song.id);
+
+      prev.splice(index, 1);
+      console.log('playlist after removal');
+      console.log(prev);
+
+      if (prev.length === 0) {
+        this.audioPlayer.pause();
+        this.currentSong.set(null);
+      }
+
+      return prev;
+    });
   }
 
   setCurrentSong(song: Song) {
@@ -54,7 +72,7 @@ export class PlayerService {
     this.audioPlayer.pause();
   }
 
-  playPreviousSong() {
+  previousSong() {
     // determine next song
     let currentSongIndex = this.currentPlaylist()
       .map((el) => el.id)
@@ -67,10 +85,14 @@ export class PlayerService {
         : this.currentPlaylist().length - 1;
 
     this.setCurrentSong(this.currentPlaylist()[previousSongIndex]);
+  }
+
+  playPreviousSong() {
+    this.previousSong();
     this.playSong();
   }
 
-  playNextSong() {
+  nextSong() {
     // determine next song
     let currentSongIndex = this.currentPlaylist()
       .map((el) => el.id)
@@ -80,8 +102,10 @@ export class PlayerService {
     let nextSongIndex = (currentSongIndex + 1) % this.currentPlaylist().length;
 
     this.setCurrentSong(this.currentPlaylist()[nextSongIndex]);
-    console.log(this.currentSong());
+  }
 
+  playNextSong() {
+    this.nextSong();
     this.playSong();
   }
 }

@@ -30,9 +30,11 @@ export class MiniPlayerComponent {
     effect(() => {
       this.currentPlaylist = this.playerService.currentPlaylist();
 
-      this.currentSongIndex = this.currentPlaylist
-        .map((el) => el.id)
-        .indexOf(this.playerService.currentSong()!.id);
+      if (this.playerService.currentSong()?.id) {
+        this.currentSongIndex = this.currentPlaylist
+          .map((el) => el.id)
+          .indexOf(this.playerService.currentSong()!.id);
+      }
     });
   }
 
@@ -52,8 +54,14 @@ export class MiniPlayerComponent {
     this.playerService.playNextSong();
   }
 
-  setAndplaySong(song: Song) {
+  setAndplaySong(event: Event, song: Song) {
+    event.stopPropagation();
     this.playerService.addAndPlaySong(song);
+  }
+
+  removeSong(event: Event, song: Song) {
+    event.stopPropagation();
+    this.playerService.removeSongFromPlaylist(song);
   }
 
   togglePlaylistVisibility() {
