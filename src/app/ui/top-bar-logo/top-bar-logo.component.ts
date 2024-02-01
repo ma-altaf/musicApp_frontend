@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar-logo',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './top-bar-logo.component.html',
   styleUrl: './top-bar-logo.component.scss',
   host: {

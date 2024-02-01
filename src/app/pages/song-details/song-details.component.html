@@ -1,0 +1,52 @@
+<div class="m-2 ml-0 p-2 w-full rounded-lg bg-white overflow-y-auto">
+  <div class="w-full flex flex-row items-center">
+    <button
+      (click)="addAndPlay()"
+      title="play song"
+      class="w-fit h-fit relative m-4"
+    >
+      <img
+        [src]="song?.imgUrl"
+        alt="song cover"
+        class="rounded-lg aspect-square w-64 object-cover"
+      />
+      <div
+        class="w-full h-full absolute top-0 left-0 flex items-center justify-center opacity-0 hover:opacity-100 duration-300"
+      >
+        <span class="material-symbols-outlined text-6xl bg-white rounded-lg">
+          play_arrow
+        </span>
+      </div>
+    </button>
+    <span class="flex flex-col ml-4">
+      <h1 class="text-3xl font-bold mb-2">{{ song?.title }}</h1>
+      <p class="text-2xl">{{ song?.author?.username }}</p>
+      <p class="text-lg text-opacity-35 text-black mt-2">
+        {{ song?.released | date }}
+      </p>
+      <div class="grid grid-cols-3 w-fit mt-4">
+        <div class="px-2 py-1 my-4 flex flex-col items-center">
+          <p class="text-sm mb-2">Downloads</p>
+          <p>{{ song?.downloads || 0 }}</p>
+        </div>
+        <div class="px-2 py-1 my-4 border-x-2 flex flex-col items-center">
+          <p class="text-sm mb-2">Favourites</p>
+          <p>{{ song?.favourites || 0 }}</p>
+        </div>
+        <div class="px-2 py-1 my-4 flex flex-col items-center">
+          <p class="text-sm mb-2">Listens</p>
+          <p>{{ song?.listens || 0 }}</p>
+        </div>
+      </div>
+    </span>
+  </div>
+  <div class="w-full p-4 pt-2">
+    <h1 class="text-2xl pb-6">More from {{ artist?.username }}:</h1>
+    <div class="w-full grid grid-cols-3 gap-6">
+      @for (otherSong of artist?.songs; track $index) { @if (otherSong.id !==
+      song?.id) {
+      <app-song-tile [song]="otherSong" />
+      } }
+    </div>
+  </div>
+</div>

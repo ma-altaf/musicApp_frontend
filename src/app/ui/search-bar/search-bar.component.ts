@@ -1,19 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { SongService } from '../../services/song/song.service';
 import { Song } from '../../services/models/song';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
   host: {
-    class: 'w-4/5 h-full',
+    class: 'w-4/5 h-full flex flex-row justify-center',
   },
 })
 export class SearchBarComponent {
   private songService: SongService = inject(SongService);
+  private router: Router = inject(Router);
   isSearching: boolean = false;
   debouceEvent: any | null = null;
   searchResult: Song[] | null = null;
@@ -41,7 +43,8 @@ export class SearchBarComponent {
   }
 
   goToSongPage(song: Song) {
-    // TODO: route to song page
-    console.log('route to song page');
+    this.router
+      .navigate(['/song', song.id])
+      .then(() => (this.isSearching = false));
   }
 }
