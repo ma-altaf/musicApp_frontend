@@ -1,6 +1,9 @@
-<div class="flex flex-row w-lvw h-lvh bg-gray-100 relative">
-  <app-panel class="w-1/5 h-full flex"></app-panel>
-  <router-outlet></router-outlet>
+<div class="flex flex-col w-lvw h-lvh bg-gray-100 relative">
+  <app-top-bar />
+  <div class="flex flex-row w-full h-full overflow-y-hidden">
+    <app-panel class="w-1/5 h-full flex"></app-panel>
+    <router-outlet></router-outlet>
+  </div>
   <app-mini-player />
   <app-playlist-popup />
 </div>

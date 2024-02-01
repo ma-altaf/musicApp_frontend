@@ -1,0 +1,39 @@
+<div class="m-0 w-3/5 flex flex-row h-full z-30">
+  @if(isSearching){
+  <div
+    (click)="toggleSearch(false)"
+    class="bg-black opacity-15 w-full h-full absolute top-0 left-0 pointer-events-auto z-0"
+  ></div>
+  }
+  <span class="w-full relative flex">
+    <input
+      class="rounded-lg p-2 w-full"
+      type="text"
+      name="search"
+      id="search"
+      (focus)="toggleSearch(true)"
+      (input)="debounceSearchSong($event)"
+    />
+    @if(isSearching && this.searchResult && this.searchResult.length > 0){
+    <div
+      class="bg-white rounded-lg absolute -bottom-2 translate-y-full left-0 w-full p-2 z-10"
+    >
+      <ul>
+        @for (song of searchResult; track $index) {
+        <li class="w-full">
+          <button
+            (click)="goToSongPage(song)"
+            class="text-nowrap w-full overflow-hidden px-2 py-1 m-0 text-start rounded-lg hover:bg-gray-100"
+          >
+            {{ song.title }}
+          </button>
+        </li>
+        }
+      </ul>
+    </div>
+    }
+  </span>
+  <button class="bg-white py-1 px-2 rounded-lg ml-2 z-10">
+    <p>Search</p>
+  </button>
+</div>
