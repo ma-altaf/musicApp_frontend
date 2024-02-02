@@ -30,13 +30,11 @@ export class SongDetailsComponent {
   constructor() {
     this.activatedRoute.params.subscribe((res) => {
       this.songService.getSongById(res['id']).subscribe((res) => {
-        console.log(res);
         this.song = res;
         this.artistService
           .getArtistById(this.song.author.id)
           .subscribe((res) => {
             this.artist = res;
-            console.log(this.artist);
           });
       });
     });
