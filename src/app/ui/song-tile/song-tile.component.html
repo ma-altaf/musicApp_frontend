@@ -2,11 +2,24 @@
   (click)="addAndPlaySong(song)"
   class="w-full rounded-lg p-4 duration-300 bg-gray-100 hover:bg-gray-200 flex flex-col items-center overflow-hidden"
 >
-  <img
-    class="w-full aspect-square rounded-xl object-cover"
-    [src]="song.imgUrl"
-    alt="image of the song"
-  />
+  <div class="w-full aspect-square rounded-xl relative overflow-hidden">
+    @defer (on viewport) {
+    <img
+      class="object-cover"
+      [ngSrc]="song.imgUrl"
+      alt="image of the song"
+      fill
+      priority
+    />
+    } @placeholder {
+    <img
+      class="object-cover"
+      src="./assets/empty_song_bg.png"
+      alt="image of the song"
+      fill
+    />
+    }
+  </div>
   <p
     class="mt-2 font-bold text-lg w-11/12 text-center text-nowrap overflow-hidden"
   >

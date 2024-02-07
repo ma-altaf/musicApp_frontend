@@ -3,13 +3,24 @@
     <button
       (click)="addAndPlay()"
       title="play song"
-      class="w-fit h-fit relative m-4"
+      class="relative m-4 w-64 aspect-square"
     >
+      @defer {
       <img
-        [src]="song?.imgUrl"
+        [ngSrc]="song!.imgUrl"
         alt="song cover"
-        class="rounded-lg aspect-square w-64 object-cover"
+        class="rounded-lg object-cover"
+        fill
+        priority
       />
+      } @placeholder {
+      <img
+        src="./assets/empty_song_bg.png"
+        alt="song cover"
+        class="rounded-lg object-cover"
+        fill
+      />
+      }
       <div
         class="w-full h-full absolute top-0 left-0 flex items-center justify-center opacity-0 hover:opacity-100 duration-300"
       >

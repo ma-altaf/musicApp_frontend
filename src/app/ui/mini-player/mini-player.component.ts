@@ -10,11 +10,12 @@ import {
 import { Song } from '../../services/models/song';
 import { PlayerService } from '../../services/player/player.service';
 import { PlaylistService } from '../../services/playlist/playlist.service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-mini-player',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './mini-player.component.html',
   styleUrl: './mini-player.component.scss',
   host: {

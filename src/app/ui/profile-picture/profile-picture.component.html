@@ -1,5 +1,10 @@
 @if (user?.imgUrl) {
-<img [src]="user?.imgUrl" alt="profile" class="object-cover w-full h-full" />
+<img
+  [ngSrc]="user!.imgUrl"
+  alt="profile"
+  class="object-cover w-full h-full"
+  fill
+/>
 } @else {
 <div
   class="font-bold w-full h-full bg-blue-500 flex items-center justify-center"

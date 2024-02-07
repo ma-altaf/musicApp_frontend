@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SongService } from '../../services/song/song.service';
 import { Song } from '../../services/models/song';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage } from '@angular/common';
 import { ArtistService } from '../../services/artist/artist.service';
 import { Artist } from '../../services/models/artist';
 import { SongTileComponent } from '../../ui/song-tile/song-tile.component';
@@ -11,7 +11,7 @@ import { PlayerService } from '../../services/player/player.service';
 @Component({
   selector: 'app-song-details',
   standalone: true,
-  imports: [DatePipe, SongTileComponent],
+  imports: [DatePipe, SongTileComponent, NgOptimizedImage],
   templateUrl: './song-details.component.html',
   styleUrl: './song-details.component.scss',
   host: {

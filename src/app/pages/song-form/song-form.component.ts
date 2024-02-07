@@ -7,11 +7,12 @@ import {
 } from '@angular/forms';
 import { SongService } from '../../services/song/song.service';
 import { Router } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-song-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgOptimizedImage],
   templateUrl: './song-form.component.html',
   styleUrl: './song-form.component.scss',
   host: {

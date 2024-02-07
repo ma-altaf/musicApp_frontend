@@ -1,11 +1,23 @@
 @if (playerService.currentPlaylist().length !== 0) {
-<div class="m-4 p-2 z-20 bg-gray-100 w-48 rounded-lg relative">
+<div class="m-4 p-2 z-20 bg-gray-100 w-48 aspect-square rounded-lg relative">
   @if (playerService.currentSong()) {
-  <img
-    src="{{ playerService.currentSong()?.imgUrl }}"
-    class="aspect-square rounded-lg object-cover"
-    alt="current song cover art"
-  />
+  <div class="relative aspect-square rounded-lg w-full overflow-hidden">
+    @defer {
+    <img
+      [ngSrc]="playerService.currentSong()!.imgUrl"
+      class="object-cover"
+      alt="current song cover art"
+      fill
+    />
+    } @placeholder {
+    <img
+      src="./assets/empty_song_bg.png"
+      class="aspect-square rounded-lg object-cover"
+      alt="current song cover art"
+      fill
+    />
+    }
+  </div>
   <p class="w-full text-center text-nowrap overflow-hidden">
     {{ playerService.currentSong()?.title }}
   </p>
@@ -65,9 +77,11 @@
           <span class="material-symbols-outlined"> playlist_add </span>
         </button>
         <img
-          src="{{ song.imgUrl }}"
+          [ngSrc]="song.imgUrl"
           alt="cover art for {{ song.title }}"
           class="w-10 rounded-lg aspect-square"
+          width="2.5"
+          height="2.5"
         />
         <div class="ml-2 max-w-full">
           <p class="overflow-hidden w-full">{{ song.title }}</p>

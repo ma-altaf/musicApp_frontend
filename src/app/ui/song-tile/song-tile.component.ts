@@ -1,12 +1,12 @@
 import { Component, Input, inject } from '@angular/core';
 import { Song } from '../../services/models/song';
 import { PlayerService } from '../../services/player/player.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-song-tile',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, NgOptimizedImage],
   templateUrl: './song-tile.component.html',
   styleUrl: './song-tile.component.scss',
 })

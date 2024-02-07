@@ -15,13 +15,14 @@
     />
     <div
       (click)="imageFileInputClick()"
-      class="aspect-square w-80 m-4 rounded-lg overflow-hidden cursor-pointer"
+      class="aspect-square w-80 m-4 rounded-lg overflow-hidden cursor-pointer relative"
     >
       <img
         #image
         src="./assets/empty_song_bg.png"
         alt="song cover"
         class="w-full h-full object-cover"
+        fill
       />
     </div>
 
