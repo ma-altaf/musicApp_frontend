@@ -48,6 +48,10 @@ export class SongService {
     return this.http.post(`${this.baseUrl}/update`, songForm);
   }
 
+  incrementFavourite(songId: string) {
+    return this.http.get(`${this.baseUrl}/favourite/${songId}`);
+  }
+
   sortSongs(songs: Song[], field: number) {
     switch (field) {
       case 0:

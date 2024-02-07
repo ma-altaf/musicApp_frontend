@@ -1,9 +1,7 @@
 import {
   Component,
   ElementRef,
-  QueryList,
   ViewChild,
-  ViewChildren,
   effect,
   inject,
 } from '@angular/core';
@@ -11,6 +9,7 @@ import { Song } from '../../services/models/song';
 import { PlayerService } from '../../services/player/player.service';
 import { PlaylistService } from '../../services/playlist/playlist.service';
 import { NgOptimizedImage } from '@angular/common';
+import { SongService } from '../../services/song/song.service';
 
 @Component({
   selector: 'app-mini-player',
@@ -25,6 +24,7 @@ import { NgOptimizedImage } from '@angular/common';
 export class MiniPlayerComponent {
   playerService: PlayerService = inject(PlayerService);
   playlistService: PlaylistService = inject(PlaylistService);
+  songService: SongService = inject(SongService);
   currentPlaylist: Song[] = [];
   @ViewChild('playlistQueue') playlistElement!: ElementRef<HTMLElement>;
   currentSongIndex: number = 0;
@@ -74,5 +74,13 @@ export class MiniPlayerComponent {
 
   togglePlaylistVisibility() {
     this.playlistElement.nativeElement.classList.toggle('hidden');
+  }
+
+  incrementFavourite() {
+    // get the song to favourite
+    const song: Song | null = this.playerService.currentSong();
+    if (song !== null) {
+      this.songService.incrementFavourite(song.id).subscribe();
+    }
   }
 }
