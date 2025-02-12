@@ -2,9 +2,11 @@
 
 Simple music player with playlist functionality.
 
-<video src="MusicApp demo.mp4" controls>watch demo: MusicApp demo.mp4</video>
+<video src="MusicApp demo.mp4" controls></video>
 
 ## Library used
 
 - AngularJS
 - TailwindCSS
+
+Watch demo: [MusicApp demo.mp4](./MusicApp%20demo.mp4)
