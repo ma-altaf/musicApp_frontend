@@ -1,5 +1,7 @@
 @if (playerService.currentPlaylist().length !== 0) {
-<div class="m-4 p-2 z-20 bg-gray-100 w-48 aspect-square rounded-lg relative">
+<div
+  class="m-5 z-20 bg-gray-100 w-48 aspect-square rounded-lg relative shadow-lg"
+>
   @if (playerService.currentSong()) {
   <div
     (dblclick)="incrementFavourite()"
@@ -21,37 +23,40 @@
     />
     }
   </div>
-  <p class="w-full text-center text-nowrap overflow-hidden">
-    {{ playerService.currentSong()?.title }}
-  </p>
-  <div class="w-full flex justify-evenly py-2">
-    <button
-      (click)="togglePlaylistVisibility()"
-      class="bg-opacity-15 bg-black p-1 flex rounded-lg duration-300 hover:bg-white hover:shadow-sm"
-    >
-      <span class="material-symbols-outlined"> queue_music </span>
-    </button>
-    <button
-      (click)="previousSong()"
-      class="p-1 hover:bg-black hover:bg-opacity-30 rounded-lg flex duration-300"
-    >
-      <span class="material-symbols-outlined"> navigate_before </span>
-    </button>
-    <button
-      (click)="toggleSongPlaying()"
-      class="p-1 bg-black bg-opacity-15 hover:bg-opacity-30 rounded-lg flex duration-300"
-    >
-      @if (playerService.audioPlayer.paused) {
-      <span class="material-symbols-outlined"> play_arrow </span>
-      }@else {
-      <span class="material-symbols-outlined"> pause </span>
-      }</button
-    ><button
-      (click)="nextSong()"
-      class="p-1 hover:bg-black hover:bg-opacity-30 rounded-lg flex duration-300"
-    >
-      <span class="material-symbols-outlined"> navigate_next </span>
-    </button>
+
+  <div class="w-full p-2 pt-0">
+    <p class="w-full text-center text-nowrap overflow-hidden py-1">
+      {{ playerService.currentSong()?.title }}
+    </p>
+    <div class="w-full flex justify-evenly">
+      <button
+        (click)="togglePlaylistVisibility()"
+        class="bg-opacity-15 bg-black p-1 flex rounded-lg duration-300 hover:bg-white hover:shadow-sm"
+      >
+        <span class="material-symbols-outlined"> queue_music </span>
+      </button>
+      <button
+        (click)="previousSong()"
+        class="p-1 hover:bg-black hover:bg-opacity-30 rounded-lg flex duration-300"
+      >
+        <span class="material-symbols-outlined"> navigate_before </span>
+      </button>
+      <button
+        (click)="toggleSongPlaying()"
+        class="p-1 bg-black bg-opacity-15 hover:bg-opacity-30 rounded-lg flex duration-300"
+      >
+        @if (playerService.audioPlayer.paused) {
+        <span class="material-symbols-outlined"> play_arrow </span>
+        }@else {
+        <span class="material-symbols-outlined"> pause </span>
+        }</button
+      ><button
+        (click)="nextSong()"
+        class="p-1 hover:bg-black hover:bg-opacity-30 rounded-lg flex duration-300"
+      >
+        <span class="material-symbols-outlined"> navigate_next </span>
+      </button>
+    </div>
   </div>
   }
   <ul
@@ -82,7 +87,7 @@
         <img
           [ngSrc]="song.imgUrl"
           alt="cover art for {{ song.title }}"
-          class="w-10 rounded-lg aspect-square"
+          class="w-10 rounded-lg aspect-square object-cover"
           width="2.5"
           height="2.5"
         />

@@ -17,15 +17,12 @@
     </button>
     <span class="mx-auto flex flex-col items-center">
       <h1 class="text-6xl">{{ user?.username }}</h1>
-      <div class="grid grid-cols-3 mt-4">
-        <div class="px-2 py-1 my-4 flex flex-col items-center">
-          <p class="text-sm">Downloads</p>
-          <p>{{ artistStats?.downloads || 0 }}</p>
+      <div class="grid grid-cols-2 mt-4">
+        <div class="px-2 py-1 my-4 flex flex-col items-center border-r-2">
+          <p class="text-sm">Songs</p>
+          <p>{{ songs?.length || 0 }}</p>
         </div>
-        <div class="px-2 py-1 my-4 border-x-2 flex flex-col items-center">
-          <p class="text-sm">Favourites</p>
-          <p>{{ artistStats?.favourites || 0 }}</p>
-        </div>
+
         <div class="px-2 py-1 my-4 flex flex-col items-center">
           <p class="text-sm">Listens</p>
           <p>{{ artistStats?.listens || 0 }}</p>

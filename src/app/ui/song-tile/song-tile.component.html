@@ -1,6 +1,6 @@
 <button
   (click)="addAndPlaySong(song)"
-  class="w-full rounded-lg p-4 duration-300 bg-gray-100 hover:bg-gray-200 flex flex-col items-center overflow-hidden"
+  class="w-full rounded-lg duration-300 bg-gray-100 hover:bg-gray-200 flex flex-col items-center overflow-hidden"
 >
   <div class="w-full aspect-square rounded-lg relative overflow-hidden">
     @defer (on viewport) {
@@ -20,38 +20,30 @@
     />
     }
   </div>
-  <p
-    class="mt-2 font-bold text-lg w-11/12 text-center text-nowrap overflow-hidden"
-  >
-    {{ song.title }}
-  </p>
-  <P class="text-sm">{{ song.author.username }}</P>
-  <div class="w-full flex justify-between items-center">
-    <span class="grid grid-cols-3 w-fit">
-      <div class="flex justify-center items-center text-lg p-1">
-        <p>{{ song.downloads }}</p>
-        <span class="material-symbols-outlined ml-1"> download </span>
-      </div>
-      <div
-        class="flex justify-center items-center text-lg p-1 border-x-2 border-opacity-15 border-black"
-      >
-        <p>{{ song.listens }}</p>
-        <span class="material-symbols-outlined ml-1"> headphones </span>
-      </div>
-      <div class="flex justify-center items-center text-lg p-1">
-        <p>{{ song.favourites }}</p>
-        <span class="material-symbols-outlined ml-1"> favorite </span>
-      </div>
-    </span>
-    <p class="w-fit h-fit">
-      {{ song.released | date }}
-    </p>
-    <button
-      (click)="addToPlayer($event, song)"
-      title="Add {{ song.title }} to playlist"
-      class="p-2 bg-black bg-opacity-15 items-center aspect-square flex rounded-lg hover:bg-white duration-300"
+  <div class="w-full p-2 pt-1">
+    <p
+      class="font-bold text-lg w-11/12 text-center text-nowrap overflow-hidden"
     >
-      <span class="material-symbols-outlined"> playlist_add </span>
-    </button>
+      {{ song.title }}
+    </p>
+    <P class="text-sm">{{ song.author.username }}</P>
+    <div class="w-full flex justify-between items-center">
+      <span class="grid grid-cols-3 w-fit">
+        <div class="flex justify-center items-center text-lg p-1">
+          <p>{{ song.listens }}</p>
+          <span class="material-symbols-outlined ml-1"> headphones </span>
+        </div>
+      </span>
+      <p class="w-fit h-fit">
+        {{ song.released | date }}
+      </p>
+      <button
+        (click)="addToPlayer($event, song)"
+        title="Add {{ song.title }} to playlist"
+        class="p-2 bg-black bg-opacity-10 items-center aspect-square flex rounded-lg hover:bg-white duration-300"
+      >
+        <span class="material-symbols-outlined"> playlist_add </span>
+      </button>
+    </div>
   </div>
 </button>
