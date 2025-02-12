@@ -2,6 +2,8 @@
 
 Simple music player with playlist functionality.
 
+<video src="MusicApp demo.mp4" controls></video>
+
 ## Library used
 
 - AngularJS
