@@ -2,8 +2,7 @@
 
 Simple music player with playlist functionality.
 
-<video src="MusicApp demo.mp4" controls></video>
-![](MusicApp%20demo.mp4)
+<video src="MusicApp demo.mp4" controls>watch demo: MusicApp demo.mp4</video>
 
 ## Library used
 
