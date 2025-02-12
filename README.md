@@ -9,4 +9,4 @@ Simple music player with playlist functionality.
 - AngularJS
 - TailwindCSS
 
-Watch demo: [MusicApp demo.mp4](./MusicApp%20demo.mp4)
+> Watch demo: [MusicApp demo.mp4](./MusicApp%20demo.mp4)
