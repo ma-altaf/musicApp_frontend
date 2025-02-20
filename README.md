@@ -2,7 +2,7 @@
 
 Simple music player with playlist functionality.
 
-<video src="MusicApp demo.mp4" controls></video>
+https://github.com/user-attachments/assets/67013c5e-783b-44e7-8c96-65a198b4378b
 
 ## Library used
 
